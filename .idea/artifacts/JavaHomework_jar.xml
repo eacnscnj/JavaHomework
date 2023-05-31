@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="JavaHomework:jar">
+    <output-path>$USER_HOME$/Desktop/homework</output-path>
+    <root id="root">
+      <element id="archive" name="JavaHomework.jar">
+        <element id="module-output" name="JavaHomework" />
+      </element>
+    </root>
+  </artifact>
+</component>
