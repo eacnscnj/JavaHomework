@@ -31,6 +31,7 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
     int [] alienx = new int[6];
     int [] alieny = new int[6];
     String Direction;
+
     public GamePanel(){
         init();
         setSizeOfGame();
@@ -93,7 +94,6 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
             }
 
             if(isStar == false){
-
                 g.setColor(Color.white);
                 g.setFont(new Font("微软雅黑",Font.BOLD,40));
                 g.drawString("Press space to start",460,400);
@@ -167,7 +167,6 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(isStar && !isFail){
-
             for(int i=0;i<6;i++) {
                 if (bulletx + 20 >= alienx[i] && bulletx - 20 <= alienx[i] && bullety + 20 >= alieny[i] && bullety - 20 <= alieny[i] && willWin[i] == false)
                     willWin[i] = true;
@@ -228,7 +227,6 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
         }
         timer.start();
     }
-
 
 
     //没用

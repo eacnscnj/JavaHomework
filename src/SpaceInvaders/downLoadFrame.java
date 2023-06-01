@@ -28,6 +28,7 @@ public class downLoadFrame extends JFrame {
         //Lambda表达式代替匿名内部类
         quitButton.addActionListener(e -> System.exit(0));
         startButton.addActionListener(e -> frame1.setVisible(true));
+        startButton.addActionListener(e -> new Sound());
         jFrame.setVisible(true);
     }
 
