@@ -14,15 +14,18 @@ import java.awt.event.KeyListener;
 */
 //继承Jpanel，实现事件接口，对Bullet和gamer的加载使用多线程
 public class GamePanel extends JPanel implements KeyListener , ActionListener {
-    boolean isStar = false;//默认不开始
+    //默认不开始
+    boolean isStar = false;
     boolean isFail = false;
     Thread thread;
+    //玩家位置
     int gamerx;
     int gamery;
     int bulletx = 0;
     int bullety = 0;
     int score;
     int bulletSpeed;
+    //判断胜利事件
     boolean []willWin = new boolean[6];
     boolean []scoerplus = new boolean[6];
     boolean win = false;
@@ -69,7 +72,8 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
     protected void paintComponent(Graphics g){
 
         try {
-            super.paintComponent(g);//clean scan
+            //清屏
+            super.paintComponent(g);
             this.setBackground(Color.WHITE);
 
             Data.header.paintIcon(this,g,0,10);
@@ -141,7 +145,8 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
                 repaint();
 
             }
-            //move
+
+            //绑定移动按钮
             if(keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP){
                 Direction = "W";
             }else if(keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN){
@@ -161,7 +166,7 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
             ee.printStackTrace();
         }
     }
-    //定时器
+    //定时器，决定帧率
     Timer timer = new Timer(100,this);
     //事件监听
     @Override
@@ -185,6 +190,7 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
                 }
             }
 
+            //子弹发射位置判断
         if(Direction.equals("W")){
             bullety = bullety - 30;
             gamery = gamery - 25;

@@ -4,9 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
+//子弹发射和定义
 public class Shot {
     public static URL BulletURL = Data.class.getResource("bullet.png");
-    public static ImageIcon bullet = new ImageIcon(BulletURL);//子弹
+    public static ImageIcon bullet = new ImageIcon(BulletURL);
     public int x;
     public int y;
 
