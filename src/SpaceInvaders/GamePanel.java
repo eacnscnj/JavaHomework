@@ -12,7 +12,7 @@ import java.awt.event.KeyListener;
 * 2.画上去
 * 3.监听事件
 */
-//继承Jpanel，实现事件接口，对Bullet和gamer的加载使用多线程
+//游戏面板
 public class GamePanel extends JPanel implements KeyListener , ActionListener {
     //默认不开始
     boolean isStar = false;
@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
     int [] alieny = new int[6];
     String Direction;
 
+    //构造函数初始化
     public GamePanel(){
         init();
         setSizeOfGame();
@@ -42,6 +43,7 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
         this.addKeyListener(this);
     }
 
+    //初始化gamer和alian大小
     public void setSizeOfGame(){
 
         Data.alien.setImage(Data.alien.getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT));
@@ -49,6 +51,7 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
         Data.gamer.setImage(Data.gamer.getImage().getScaledInstance(50,50,Image.SCALE_DEFAULT));
         Data.background.setImage(Data.background.getImage().getScaledInstance(1395,680,Image.SCALE_DEFAULT));
     }
+    //初始化数值和位置
     public void init(){
         gamerx = 100;
         gamery = 230;
@@ -67,7 +70,9 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
         shot=new Shot(gamerx,gamery);
         timer.start();
     }
-    @Override//annotation,注解，限定父类重写方法
+
+    //annotation,注解，限定父类重写方法
+    @Override
     //画笔
     protected void paintComponent(Graphics g){
 
@@ -77,7 +82,8 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
             this.setBackground(Color.WHITE);
 
             Data.header.paintIcon(this,g,0,10);
-            //操作界面大小
+
+            //操作界面大小和排版
             g.fillRect(25,180,1395,680);
             Data.background.paintIcon(this,g,25,180);
 
@@ -125,7 +131,7 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
     }
 
     @Override
-    //TODO：键盘监听
+    //键盘监听
     public void keyPressed(KeyEvent e) {
         try {
             int keyCode = e.getKeyCode();
@@ -168,22 +174,22 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
     }
     //定时器，决定帧率
     Timer timer = new Timer(100,this);
+
     //事件监听
     @Override
     public void actionPerformed(ActionEvent e) {
         if(isStar && !isFail){
+
+            //击中判定
             for(int i=0;i<6;i++) {
                 if (bulletx + 20 >= alienx[i] && bulletx - 20 <= alienx[i] && bullety + 20 >= alieny[i] && bullety - 20 <= alieny[i] && willWin[i] == false)
                     willWin[i] = true;
-                    score = score + 1;
             }
             for(int i = 0;i<6;i++) {
 
                 if(willWin[i] == false) {
                     alienx[i] = alienx[i] - 10;
-                    if (scoerplus[i] == false) {
-                        scoerplus[i] = true;
-                    }
+
                 }
                 else{
                     alienx[i] = alienx[i] + 25;
@@ -194,13 +200,13 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
         if(Direction.equals("W")){
             bullety = bullety - 30;
             gamery = gamery - 25;
+
             //边界判断
             if(gamery < 180)
                 gamery = 700;
         }else if(Direction.equals("S")){
             bullety = bullety + 30;
             gamery = gamery + 25;
-            //边界判断
             if(gamery > 860)
                 gamery = 60;
         }else if(Direction.equals("A")){
@@ -216,12 +222,18 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
                 gamerx = 25;
             }
         }
+
         //TODO:成功判断
             int cnt = 0;
-            for(int i=0;i<6;i++){
-                if(willWin[i])
+            for(int i=0;i<6;i++) {
+                if (willWin[i]) {
                     cnt = cnt + 1;
-        }
+                    if (scoerplus[i] == false) {
+                        score = score + 20;
+                        scoerplus[i] = true;
+                    }
+                }
+            }
             if(cnt==6)
                 win = true;
         //TODO：失败判断
