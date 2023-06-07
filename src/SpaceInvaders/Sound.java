@@ -14,14 +14,16 @@ public class Sound extends Thread{
     Sound() {
         //可能出现异常，使用try-catch
         try {
-            Clip bgm = AudioSystem.getClip();
-            URL is = Sound.class.getResource("music.wav");
-            //打开文件
-            AudioInputStream ais = AudioSystem.getAudioInputStream(is);
-            bgm.open(ais);
-            bgm.start();
-            //循环
-            bgm.loop(Clip.LOOP_CONTINUOUSLY);
+            synchronized (Sound.class) {
+                Clip bgm = AudioSystem.getClip();
+                URL is = Sound.class.getResource("music.wav");
+                //打开文件
+                AudioInputStream ais = AudioSystem.getAudioInputStream(is);
+                bgm.open(ais);
+                bgm.start();
+                //循环
+                bgm.loop(Clip.LOOP_CONTINUOUSLY);
+            }
 
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);

@@ -55,6 +55,8 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
     public void init(){
         gamerx = 100;
         gamery = 230;
+        bulletx = 1;
+        bullety = 1;
         thread = new Thread();
         bulletSpeed = 20;
         score = 0;
@@ -164,8 +166,8 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
             }
 
             if(keyCode == KeyEvent.VK_J){
-                bulletx = gamerx;
-                bullety = gamery;
+                bulletx = gamerx+10;
+                bullety = gamery+10;
             }
         }
         catch (Exception ee){
@@ -198,25 +200,25 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
 
             //子弹发射位置判断
         if(Direction.equals("W")){
-            bullety = bullety - 30;
+            bullety = bullety - 40;
             gamery = gamery - 25;
 
             //边界判断
             if(gamery < 180)
                 gamery = 700;
         }else if(Direction.equals("S")){
-            bullety = bullety + 30;
+            bullety = bullety + 40;
             gamery = gamery + 25;
             if(gamery > 860)
                 gamery = 60;
         }else if(Direction.equals("A")){
-            bulletx = bulletx - 30;
+            bulletx = bulletx - 40;
             gamerx = gamerx - 25;
             if(gamerx < 10){
                 gamerx = 1370;
             }
         } else if (Direction.equals("D")) {
-            bulletx = bulletx + 30;
+            bulletx = bulletx + 40;
             gamerx = gamerx + 25;
             if(gamerx > 1395){
                 gamerx = 25;
@@ -230,6 +232,8 @@ public class GamePanel extends JPanel implements KeyListener , ActionListener {
                     cnt = cnt + 1;
                     if (scoerplus[i] == false) {
                         score = score + 20;
+                        bulletx = -1;
+                        bullety = -1;
                         scoerplus[i] = true;
                     }
                 }
