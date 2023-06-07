@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 //播放音乐
-public class Sound {
+public class Sound extends Thread{
     Sound() {
         //可能出现异常，使用try-catch
         try {
